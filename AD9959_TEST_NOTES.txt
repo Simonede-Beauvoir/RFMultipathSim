@@ -1,0 +1,40 @@
+AD9959 CH0 35 MHz test configuration
+====================================
+
+Reference clock used by firmware : 25,000,500 Hz
+PLL multiplier                    : 19
+Calculated AD9959 system clock    : 475,009,500 Hz
+CH0 requested output              : 35,000,000 Hz
+Expected CH0 FTW                  : 0x12DCDF31
+Expected actual frequency         : about 34,999,999.98 Hz
+
+Important SPI settings
+----------------------
+Data size     : 8 bits
+Mode          : CPOL=0, CPHA=0
+Bit order     : MSB first
+SPI clock     : about 1.5 MHz
+Software CS   : PD0, idle high
+I/O_UPDATE    : PD1, idle low
+MASTER_RESET  : PD2, idle low
+PWR_DWN_CTL   : PD3, idle low
+
+Main fixes in this archive
+--------------------------
+1. CS now starts high instead of briefly selecting the AD9959 at boot.
+2. SPI NSS pulse is disabled and the SPI output state is retained.
+3. SPI and AD9959 control GPIO speed is raised to HIGH.
+4. AD9959 writes each complete register in one HAL SPI transaction.
+5. Register-write errors are retained in the driver and checked in main.c.
+6. The signed reference-clock calibration calculation is corrected.
+7. Amplitude is clamped to the real 10-bit range, 0 to 1023.
+8. A 19x PLL is used because 25.0005 MHz x 20 would exceed 500 MHz.
+9. CH1 to CH3 are explicitly muted; CH0 alone is set to 35 MHz.
+
+First measurement
+-----------------
+Measure from the CH0 SMA output with a short coaxial cable. Use a 50-ohm
+scope input or an external 50-ohm feed-through terminator. Do not use a long
+probe ground lead. If automatic frequency measurement still reports 50 MHz,
+check the period with time cursors and inspect SCK, SDIO0, CS and I/O_UPDATE
+with a logic analyzer.

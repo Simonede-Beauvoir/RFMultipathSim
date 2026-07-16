@@ -1,0 +1,31 @@
+# CMake / CLion build output
+/build/
+/cmake-build-*/
+/out/
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+build.ninja
+.ninja_*
+
+# Compiled firmware and intermediate files
+*.elf
+*.map
+*.hex
+*.bin
+*.o
+*.obj
+*.su
+*.d
+
+# IDE-local settings
+.idea/
+.vscode/
+*.suo
+*.user
+
+# Operating system files
+Thumbs.db
+.DS_Store
