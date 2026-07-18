@@ -47,6 +47,7 @@
 #define TJC_HMI_STARTUP_DELAY_MS    10U
 #define TJC_HMI_READ_TIMEOUT_MS     30U
 #define TJC_HMI_READ_RETRY_COUNT    3U
+//test อฦหอ
 
 /* USER CODE END PD */
 
